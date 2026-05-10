@@ -19,7 +19,6 @@ vim.o.relativenumber = true
 -- Tab
 vim.o.expandtab = true
 vim.o.shiftwidth = 8
-vim.o.softtabstop = 8
 vim.o.tabstop = 8
 
 -- Highlight when yanking (copying) text.
