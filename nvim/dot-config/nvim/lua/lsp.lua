@@ -3,6 +3,7 @@ local lsps = {
         'vue_ls',
         'vtsls',
         'pyrefly',
+        'ansiblels',
 }
 
 vim.lsp.enable(lsps)
