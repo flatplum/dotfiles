@@ -3,7 +3,9 @@
 -- local mason_registry = require('mason-registry')
 -- local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
 -- For Mason v2,
-local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+local vue_language_server_path = vim.fn.expand('$MASON/packages')
+        .. '/vue-language-server'
+        .. '/node_modules/@vue/language-server'
 -- or even
 -- local vue_language_server_path = vim.fn.stdpath('data') .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
 -- local vue_language_server_path = '/path/to/@vue/language-server'
@@ -23,14 +25,21 @@ return {
                         },
                 },
         },
-        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        filetypes = {
+                'typescript',
+                'javascript',
+                'javascriptreact',
+                'typescriptreact',
+                'vue',
+        },
         -- See https://github.com/vuejs/language-tools/wiki/Neovim
         on_attach = function(client)
                 local existing_capabilities = client.server_capabilities
                 if vim.bo.filetype == 'vue' then
-                        existing_capabilities.semanticTokensProvider.full = false
+                        existing_capabilities.semanticTokensProvider.full =
+                                false
                 else
                         existing_capabilities.semanticTokensProvider.full = true
                 end
-        end
+        end,
 }

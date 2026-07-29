@@ -1,12 +1,12 @@
 vim.pack.add({
-        { src = 'https://github.com/hrsh7th/nvim-cmp', },
-        { src = 'https://github.com/hrsh7th/cmp-nvim-lsp', },
-        { src = 'https://github.com/hrsh7th/cmp-buffer', },
-        { src = 'https://github.com/hrsh7th/cmp-path', },
-        { src = 'https://github.com/hrsh7th/cmp-cmdline', },
+        { src = 'https://github.com/hrsh7th/nvim-cmp' },
+        { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
+        { src = 'https://github.com/hrsh7th/cmp-buffer' },
+        { src = 'https://github.com/hrsh7th/cmp-path' },
+        { src = 'https://github.com/hrsh7th/cmp-cmdline' },
 })
 -- Set up nvim-cmp.
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
         snippet = {
@@ -25,18 +25,18 @@ cmp.setup({
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                ['<Tab>'] = cmp.mapping(function (fallback)
+                ['<Tab>'] = cmp.mapping(function(fallback)
                         (cmp.visible() and cmp.select_next_item or fallback)()
                 end),
-                ['<S-Tab>'] = cmp.mapping(function (fallback)
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
                         (cmp.visible() and cmp.select_prev_item or fallback)()
-                end)
+                end),
         }),
         sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
         }, {
                 { name = 'buffer' },
-        })
+        }),
 })
 
 -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
@@ -48,31 +48,32 @@ cmp.setup({
                 { name = 'buffer' },
         })
 })
-require('cmp_git').setup() ]]--
+require('cmp_git').setup() ]]
+--
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-                { name = 'buffer' }
-        }
+                { name = 'buffer' },
+        },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-                { name = 'path' }
+                { name = 'path' },
         }, {
-                { name = 'cmdline' }
+                { name = 'cmdline' },
         }),
-        matching = { disallow_symbol_nonprefix_matching = false }
+        matching = { disallow_symbol_nonprefix_matching = false },
 })
 
 local lsps = require('lsp')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 for _, v in pairs(lsps) do
         vim.lsp.config(v, {
-                capabilities = capabilities
+                capabilities = capabilities,
         })
 end

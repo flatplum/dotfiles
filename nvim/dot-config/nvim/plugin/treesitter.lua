@@ -2,7 +2,7 @@ vim.pack.add({
         { src = 'https://github.com/romus204/tree-sitter-manager.nvim' },
 })
 
-require("tree-sitter-manager").setup({
+require('tree-sitter-manager').setup({
         -- Default Options
         ensure_installed = {
                 'css',

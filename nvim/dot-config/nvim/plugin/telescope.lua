@@ -1,10 +1,10 @@
 vim.pack.add({
         { src = 'https://github.com/nvim-telescope/telescope.nvim' },
         { src = 'https://github.com/nvim-lua/plenary.nvim' },
-        { src = 'https://github.com/nvim-tree/nvim-web-devicons' }
+        { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
 })
 
-require('telescope').setup{
+require('telescope').setup({
         defaults = {
                 initial_mode = 'normal',
                 mappings = {
@@ -12,9 +12,9 @@ require('telescope').setup{
                                 -- map actions.which_key to <C-h> (default: <C-/>)
                                 -- actions.which_key shows the mappings for your picker,
                                 -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                                ['<C-h>'] = 'which_key'
-                        }
-                }
+                                ['<C-h>'] = 'which_key',
+                        },
+                },
         },
         pickers = {
                 -- Default configuration for builtin pickers goes here:
@@ -31,8 +31,13 @@ require('telescope').setup{
                 --   extension_config_key = value,
                 -- }
                 -- please take a look at the readme of the extension you want to configure
-        }
-}
+        },
+})
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set(
+        'n',
+        '<leader>ff',
+        builtin.find_files,
+        { desc = 'Telescope find files' }
+)
