@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd('UIEnter', {
 })
 vim.o.mouse = ''
 vim.o.scrolloff = 11
+vim.o.undofile = true
 
 -- Display
 vim.o.cc = '80'
@@ -15,6 +16,8 @@ vim.o.cursorline = true
 vim.o.list = true
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.winborder = 'single'
+vim.o.signcolumn = 'yes'
 
 -- Tab
 vim.o.expandtab = true

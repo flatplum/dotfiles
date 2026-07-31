@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 
 vim.keymap.set('n', '<leader>e', vim.cmd.Ex)
+vim.keymap.set('n', '<leader>t', vim.cmd.terminal)
 
 vim.api.nvim_create_user_command('SetIndent', function(opts)
         local n = tonumber(opts.args) or 8
