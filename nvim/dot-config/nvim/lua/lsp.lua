@@ -4,6 +4,7 @@ local lsps = {
         'vtsls',
         'pyrefly',
         'ansiblels',
+        'julials',
 }
 
 vim.lsp.enable(lsps)

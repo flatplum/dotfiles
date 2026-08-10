@@ -9,4 +9,5 @@ require('nvim-treesitter').install({
         'vue',
         'python',
         'yaml',
+        'julia',
 })
