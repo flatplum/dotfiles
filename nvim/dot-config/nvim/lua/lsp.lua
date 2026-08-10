@@ -6,6 +6,7 @@ local lsps = {
         'pyrefly',
         'ansiblels',
         'julials',
+        'texlab',
 }
 
 vim.lsp.enable(lsps)
