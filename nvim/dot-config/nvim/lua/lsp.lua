@@ -1,4 +1,5 @@
 local lsps = {
+        'clangd',
         'lua_ls',
         'vue_ls',
         'vtsls',
