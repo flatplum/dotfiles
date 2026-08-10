@@ -4,8 +4,11 @@ vim.pack.add({
         { src = 'https://github.com/hrsh7th/cmp-buffer' },
         { src = 'https://github.com/hrsh7th/cmp-path' },
         { src = 'https://github.com/hrsh7th/cmp-cmdline' },
+        { src = 'https://github.com/L3MON4D3/LuaSnip' },
+        { src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
 })
 -- Set up nvim-cmp.
+local luasnip = require('luasnip')
 local cmp = require('cmp')
 
 cmp.setup({
@@ -24,16 +27,43 @@ cmp.setup({
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
-                ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ['<CR>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                                if luasnip.expandable() then
+                                        luasnip.expand()
+                                        return
+                                elseif cmp.get_active_entry() then
+                                        cmp.confirm({
+                                                behavior = cmp.ConfirmBehavior.Replace,
+                                                select = false,
+                                        })
+                                        return
+                                end
+                        end
+                        fallback()
+                end),
                 ['<Tab>'] = cmp.mapping(function(fallback)
-                        (cmp.visible() and cmp.select_next_item or fallback)()
-                end),
+                        if cmp.visible() then
+                                cmp.select_next_item()
+                        elseif luasnip.locally_jumpable(1) then
+                                luasnip.jump(1)
+                        else
+                                fallback()
+                        end
+                end, { 'i', 's' }),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        (cmp.visible() and cmp.select_prev_item or fallback)()
-                end),
+                        if cmp.visible() then
+                                cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                                luasnip.jump(-1)
+                        else
+                                fallback()
+                        end
+                end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
+                { name = 'luasnip' },
         }, {
                 { name = 'buffer' },
         }),
@@ -77,3 +107,17 @@ for _, v in pairs(lsps) do
                 capabilities = capabilities,
         })
 end
+
+-- Somewhere in your Neovim startup, e.g. init.lua
+require('luasnip').config.set_config({ -- Setting LuaSnip config
+
+        -- Enable autotriggered snippets
+        enable_autosnippets = true,
+
+        -- Use Tab (or some other key if you prefer) to trigger visual selection
+        store_selection_keys = '<Tab>',
+})
+
+require('luasnip.loaders.from_lua').load({
+        paths = vim.fn.stdpath('config') .. '/snippets',
+})
