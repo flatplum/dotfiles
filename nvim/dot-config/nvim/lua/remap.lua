@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', '<leader>e', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>t', vim.cmd.terminal)
+vim.keymap.set('n', '<leader>rr', vim.cmd.restart)
 vim.keymap.set('n', '<leader>m', ':make ')
 
 vim.api.nvim_create_user_command('SetIndent', function(opts)
