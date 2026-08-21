@@ -209,11 +209,11 @@ local function make(buf, opts)
                 end
         end
         vim.fn.winrestview(x)
-        if state.viewers[buf] then
-                vim.defer_fn(function()
-                        synctex_view(buf, opts.viewfile)
-                end, 150)
-        end
+        -- if state.viewers[buf] then
+        --         vim.defer_fn(function()
+        --                 synctex_view(buf, opts.viewfile)
+        --         end, 150)
+        -- end
         if next(vim.fn.getqflist()) ~= nil then
                 vim.cmd('copen')
                 return
