@@ -24,6 +24,9 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 8
 vim.o.tabstop = 8
 
+-- Spellcheck
+vim.o.spelllang = 'en_au'
+
 -- Highlight when yanking (copying) text.
 vim.api.nvim_create_autocmd('TextYankPost', {
         desc = 'Highlight when yanking (copying) text',
