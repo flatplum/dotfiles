@@ -7,6 +7,7 @@ local lsps = {
         'ansiblels',
         'julials',
         'texlab',
+        'marksman',
 }
 
 vim.lsp.enable(lsps)
